@@ -2,7 +2,10 @@
 #python 3.6.9
 #Author:GOyan
 
-import system
+#TODO add intro, rules. Add working replay function. Polish board up. Add game/win counter.
+
+
+import sys
 
 theBoard = {'7': ' ', '8': ' ', '9': ' ',
             '4': ' ', '5': ' ', '6': ' ',
@@ -68,13 +71,27 @@ def winConditions():
         return True
     return False
 
+# Main game loop. Loop does not stop after win!
+def mainGame():
+    while winConditions() == False:
+        print('PLAYER 1: Choose your position.')
+        playerONEInput = input()
+        playerONEchoice(playerONEInput.upper())
+
+        if winConditions() == True:
+            break
+            win()
+        print('PLAYER 2: Choose your position.')
+        playerTWOInput = input()
+        playerTWOchoice(playerTWOInput.upper())
+        
 def replay():
     print('Would you like to play again? (Y/N)')
     yesNo = input()
-    if yesNo.upper() == Y: 
-        maingame()
-    else:
-        sys.exit()
+    if yesNo.upper() == 'Y': 
+        return True
+    return False
+        
         
 #TODO Add introduction and rules.
 printBoard(theBoard)
@@ -83,26 +100,15 @@ printBoard(theBoard)
 print('Player 1: Please select X or O.') 
 player1 = input()
 
-if player1 == 'X':
+if player1.upper() == 'X':
     player2 = 'O'
     
-elif player1 == 'O':
+elif player1.upper() == 'O':
     player2 = 'X'
     print('Player 1: X, Player 2: O')
 
-# Main game loop. Loop does not stop after win!
-def mainGame():
-    while winConditions() == False:
-        print('PLAYER 1: Choose your position.')
-        playerONEInput = input()
-        playerONEchoice(playerONEInput)
 
-        if winConditions() == True:
-            break
-            win()
-        print('PLAYER 2: Choose your position.')
-        playerTWOInput = input()
-        playerTWOchoice(playerTWOInput)
+    mainGame()
+    win()
+    replay()
 
-
-win()
