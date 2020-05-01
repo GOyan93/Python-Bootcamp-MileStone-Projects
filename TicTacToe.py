@@ -98,10 +98,8 @@ elif player1 == 'O':
     player2 = 'X'
     print('Player 1: X, Player 2: O')
 
-# Main game loop.
-while True:
-    if winConditions() == True:
-        break
+# Main game loop. Loop does not stop after win!
+while winConditions() == False:
     
     for i in range(9):
         print('PLAYER 1: Choose your position.')
