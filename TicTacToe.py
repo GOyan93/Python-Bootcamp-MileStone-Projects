@@ -2,6 +2,8 @@
 #python 3.6.9
 #Author:GOyan
 
+import system
+
 theBoard = {'7': ' ', '8': ' ', '9': ' ',
             '4': ' ', '5': ' ', '6': ' ',
             '1': ' ', '2': ' ', '3': ' '}
@@ -30,59 +32,49 @@ def winConditions():
     # Horizontal Wins
     if theBoard['7'] == 'X' and theBoard['8'] == 'X' and theBoard['9'] == 'X':
         return True
-        win()
     elif theBoard['4'] == 'X' and theBoard['5'] == 'X' and theBoard['6'] == 'X':
         return True
-        win()
     elif theBoard['1'] == 'X' and theBoard['2'] == 'X' and theBoard['3'] == 'X':
         return True
-        win()
     elif theBoard['7'] == 'O' and theBoard['8'] == 'O' and theBoard['9'] == 'O':
         return True
-        win()
     elif theBoard['4'] == 'O' and theBoard['5'] == 'O' and theBoard['6'] == 'O':
         return True
-        win()
     elif theBoard['1'] == 'O' and theBoard['2'] == 'O' and theBoard['3'] == 'O':
         return True
-        win()
         
     # Vertical Wins
     elif theBoard['7'] == 'X' and theBoard['4'] == 'X' and theBoard['1'] == 'X':
         return True
-        win()
     elif theBoard['8'] == 'X' and theBoard['5'] == 'X' and theBoard['2'] == 'X':
         return True
-        win()
     elif theBoard['9'] == 'X' and theBoard['6'] == 'X' and theBoard['3'] == 'X':
         return True
-        win()
     elif theBoard['7'] == 'O' and theBoard['4'] == 'O' and theBoard['1'] == 'O':
         return True
-        win()
     elif theBoard['8'] == 'O' and theBoard['5'] == 'O' and theBoard['2'] == 'O':
         return True
-        win()
     elif theBoard['9'] == 'O' and theBoard['6'] == 'O' and theBoard['3'] == 'O':
         return True
-        win()
 
     #Diagonal Wins
     elif theBoard['7'] == 'X' and theBoard['5'] == 'X' and theBoard['3'] == 'X':
         return True
-        win()
     elif theBoard['9'] == 'X' and theBoard['5'] == 'X' and theBoard['1'] == 'X':
         return True
-        win()
     elif theBoard['7'] == 'O' and theBoard['5'] == 'O' and theBoard['3'] == 'O':
         return True
-        win()
     elif theBoard['9'] == 'O' and theBoard['5'] == 'O' and theBoard['1'] == 'O':
         return True
-        win()
     return False
 
-
+def replay():
+    print('Would you like to play again? (Y/N)')
+    yesNo = input()
+    if yesNo.upper() == Y: 
+        maingame()
+    else:
+        sys.exit()
         
 #TODO Add introduction and rules.
 printBoard(theBoard)
@@ -99,11 +91,18 @@ elif player1 == 'O':
     print('Player 1: X, Player 2: O')
 
 # Main game loop. Loop does not stop after win!
-while winConditions() == False:
+def mainGame():
+    while winConditions() == False:
         print('PLAYER 1: Choose your position.')
         playerONEInput = input()
         playerONEchoice(playerONEInput)
 
+        if winConditions() == True:
+            break
+            win()
         print('PLAYER 2: Choose your position.')
         playerTWOInput = input()
         playerTWOchoice(playerTWOInput)
+
+
+win()
