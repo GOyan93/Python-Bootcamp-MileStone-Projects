@@ -15,8 +15,19 @@ def printBoard(board):
           '-' + '+' + '-' + '+' + '-' + '\n' +
           board['1'] + '|' + board['2'] + '|' + board['3'])
 
+def playerONEchoice(playerONEinput):
+    theBoard[playerONEinput] = player1
+    printBoard(theBoard)
+    
+def playerTWOchoice(playerTWOinput):
+    theBoard[playerTWOinput] = player2
+    printBoard(theBoard)
+
+
+#TODO Add introduction and rules.
 printBoard(theBoard)
 
+#Player selection.
 print('Player 1: Please select X or O.') 
 player1 = input()
 
@@ -27,19 +38,11 @@ elif player1 = 'O':
     player2 = 'X'
     print('Player 1: X, Player 2: O')
 
-
-def playerONEchoice(playerONEinput):
-    theBoard[playerONEinput] = player1
-    printBoard(theBoard)
-    
-def playerTWOchoice(playerTWOinput):
-    theBoard[playerTWOinput] = player2
-    printBoard(theBoard)
-
+# Main game loop.
 while True:
     if theBoard[7] = 'X' and theBoard[8] = 'X' and theBoard[9] = 'X':
         break
-        # Add win() function
+        # TODO Add win() function.
 
     for i in range(9):
         print('PLAYER 1: Choose your position.')
