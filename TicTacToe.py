@@ -23,7 +23,64 @@ def playerTWOchoice(playerTWOinput):
     theBoard[playerTWOinput] = player2
     printBoard(theBoard)
 
+def winConditions():
+    # Horizontal Wins
+    if theBoard[7] = 'X' and theBoard[8] = 'X' and theBoard[9] = 'X':
+        return True
+        # TODO Add win() function.
+    elif theBoard[4] = 'X' and theBoard[5] = 'X' and theBoard[6] = 'X':
+        return True
+        # TODO Add win() function.
+    elif theBoard[1] = 'X' and theBoard[2] = 'X' and theBoard[3] = 'X':
+        return True
+        # TODO Add win() function.
+    elif theBoard[7] = 'O' and theBoard[8] = 'O' and theBoard[9] = 'O':
+        return True
+        # TODO Add win() function.
+    elif theBoard[4] = 'O' and theBoard[5] = 'O' and theBoard[6] = 'O':
+        return True
+        # TODO Add win() function.
+    elif theBoard[1] = 'O' and theBoard[2] = 'O' and theBoard[3] = 'O':
+        return True
+        # TODO Add win() function.
+        
+    # Vertical Wins
+    elif theBoard[7] = 'X' and theBoard[4] = 'X' and theBoard[1] = 'X':
+        return True
+        # TODO Add win() function.
+    elif theBoard[8] = 'X' and theBoard[5] = 'X' and theBoard[2] = 'X':
+        return True
+        # TODO Add win() function.
+    elif theBoard[9] = 'X' and theBoard[6] = 'X' and theBoard[3] = 'X':
+        return True
+        # TODO Add win() function.
+    elif theBoard[7] = 'O' and theBoard[4] = 'O' and theBoard[1] = 'O':
+        return True
+        # TODO Add win() function.
+    elif theBoard[8] = 'O' and theBoard[5] = 'O' and theBoard[2] = 'O':
+        return True
+        # TODO Add win() function.
+    elif theBoard[9] = 'O' and theBoard[6] = 'O' and theBoard[3] = 'O':
+        return True
+        # TODO Add win() function.
 
+    #Diagonal Wins
+    elif theBoard[7] = 'X' and theBoard[5] = 'X' and theBoard[3] = 'X':
+        return True
+        # TODO Add win() function.
+    elif theBoard[9] = 'X' and theBoard[5] = 'X' and theBoard[1] = 'X':
+        return True
+        # TODO Add win() function.
+    elif theBoard[7] = 'O' and theBoard[5] = 'O' and theBoard[3] = 'O':
+        return True
+        # TODO Add win() function.
+    elif theBoard[9] = 'O' and theBoard[5] = 'O' and theBoard[1] = 'O':
+        return True
+        # TODO Add win() function.
+
+
+
+        
 #TODO Add introduction and rules.
 printBoard(theBoard)
 
@@ -40,10 +97,10 @@ elif player1 = 'O':
 
 # Main game loop.
 while True:
-    if theBoard[7] = 'X' and theBoard[8] = 'X' and theBoard[9] = 'X':
+    if winConditions() = True:
         break
-        # TODO Add win() function.
 
+    
     for i in range(9):
         print('PLAYER 1: Choose your position.')
         playerONEInput = input()
