@@ -17,11 +17,15 @@ def printBoard(board):
 
 printBoard(theBoard)
 
-player1 = 'X'
+print('Player 1: Please select X or O.') 
+player1 = input()
 
-
-player2 = 'O'
-
+if player1 = 'X':
+    player2 = 'O'
+    
+elif player1 = 'O':
+    player2 = 'X'
+    print('Player 1: X, Player 2: O')
 
 
 def playerONEchoice(playerONEinput):
