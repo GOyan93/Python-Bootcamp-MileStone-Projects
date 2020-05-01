@@ -32,11 +32,16 @@ def playerTWOchoice(playerTWOinput):
     theBoard[playerTWOinput] = player2
     printBoard(theBoard)
 
-for i in range(9):
-    print('PLAYER 1: Choose your position.')
-    playerONEInput = input()
-    playerONEchoice(playerONEInput)
+while True:
+    if theBoard[7] = 'X' and theBoard[8] = 'X' and theBoard[9] = 'X':
+        break
+        # Add win() function
 
-    print('PLAYER 2: Choose your position.')
-    playerTWOInput = input()
-    playerTWOchoice(playerTWOInput)
+    for i in range(9):
+        print('PLAYER 1: Choose your position.')
+        playerONEInput = input()
+        playerONEchoice(playerONEInput)
+
+        print('PLAYER 2: Choose your position.')
+        playerTWOInput = input()
+        playerTWOchoice(playerTWOInput)
