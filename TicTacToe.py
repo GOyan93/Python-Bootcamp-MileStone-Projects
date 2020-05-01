@@ -32,10 +32,11 @@ def playerTWOchoice(playerTWOinput):
     theBoard[playerTWOinput] = player2
     printBoard(theBoard)
 
-print('PLAYER 1: Choose your position.')
-playerONEInput = input()
-playerONEchoice(playerONEInput)
+for i in range(9):
+    print('PLAYER 1: Choose your position.')
+    playerONEInput = input()
+    playerONEchoice(playerONEInput)
 
-print('PLAYER 2: Choose your position.')
-playerTWOInput = input()
-playerTWOchoice(playerTWOInput)
+    print('PLAYER 2: Choose your position.')
+    playerTWOInput = input()
+    playerTWOchoice(playerTWOInput)
