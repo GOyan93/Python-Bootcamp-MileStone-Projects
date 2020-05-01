@@ -28,56 +28,56 @@ def win():
     
 def winConditions():
     # Horizontal Wins
-    if theBoard[7] == 'X' and theBoard[8] == 'X' and theBoard[9] == 'X':
+    if theBoard['7'] == 'X' and theBoard['8'] == 'X' and theBoard['9'] == 'X':
         return True
         win()
-    elif theBoard[4] == 'X' and theBoard[5] == 'X' and theBoard[6] == 'X':
+    elif theBoard['4'] == 'X' and theBoard['5'] == 'X' and theBoard['6'] == 'X':
         return True
         win()
-    elif theBoard[1] == 'X' and theBoard[2] == 'X' and theBoard[3] == 'X':
+    elif theBoard['1'] == 'X' and theBoard['2'] == 'X' and theBoard['3'] == 'X':
         return True
         win()
-    elif theBoard[7] == 'O' and theBoard[8] == 'O' and theBoard[9] == 'O':
+    elif theBoard['7'] == 'O' and theBoard['8'] == 'O' and theBoard['9'] == 'O':
         return True
         win()
-    elif theBoard[4] == 'O' and theBoard[5] == 'O' and theBoard[6] == 'O':
+    elif theBoard['4'] == 'O' and theBoard['5'] == 'O' and theBoard['6'] == 'O':
         return True
         win()
-    elif theBoard[1] == 'O' and theBoard[2] == 'O' and theBoard[3] == 'O':
+    elif theBoard['1'] == 'O' and theBoard['2'] == 'O' and theBoard['3'] == 'O':
         return True
         win()
         
     # Vertical Wins
-    elif theBoard[7] == 'X' and theBoard[4] == 'X' and theBoard[1] == 'X':
+    elif theBoard['7'] == 'X' and theBoard['4'] == 'X' and theBoard['1'] == 'X':
         return True
         win()
-    elif theBoard[8] == 'X' and theBoard[5] == 'X' and theBoard[2] == 'X':
+    elif theBoard['8'] == 'X' and theBoard['5'] == 'X' and theBoard['2'] == 'X':
         return True
         win()
-    elif theBoard[9] == 'X' and theBoard[6] == 'X' and theBoard[3] == 'X':
+    elif theBoard['9'] == 'X' and theBoard['6'] == 'X' and theBoard['3'] == 'X':
         return True
         win()
-    elif theBoard[7] == 'O' and theBoard[4] == 'O' and theBoard[1] == 'O':
+    elif theBoard['7'] == 'O' and theBoard['4'] == 'O' and theBoard['1'] == 'O':
         return True
         win()
-    elif theBoard[8] == 'O' and theBoard[5] == 'O' and theBoard[2] == 'O':
+    elif theBoard['8'] == 'O' and theBoard['5'] == 'O' and theBoard['2'] == 'O':
         return True
         win()
-    elif theBoard[9] == 'O' and theBoard[6] == 'O' and theBoard[3] == 'O':
+    elif theBoard['9'] == 'O' and theBoard['6'] == 'O' and theBoard['3'] == 'O':
         return True
         win()
 
     #Diagonal Wins
-    elif theBoard[7] == 'X' and theBoard[5] == 'X' and theBoard[3] == 'X':
+    elif theBoard['7'] == 'X' and theBoard['5'] == 'X' and theBoard['3'] == 'X':
         return True
         win()
-    elif theBoard[9] == 'X' and theBoard[5] == 'X' and theBoard[1] == 'X':
+    elif theBoard['9'] == 'X' and theBoard['5'] == 'X' and theBoard['1'] == 'X':
         return True
         win()
-    elif theBoard[7] == 'O' and theBoard[5] == 'O' and theBoard[3] == 'O':
+    elif theBoard['7'] == 'O' and theBoard['5'] == 'O' and theBoard['3'] == 'O':
         return True
         win()
-    elif theBoard[9] == 'O' and theBoard[5] == 'O' and theBoard[1] == 'O':
+    elif theBoard['9'] == 'O' and theBoard['5'] == 'O' and theBoard['1'] == 'O':
         return True
         win()
     return False
@@ -91,16 +91,16 @@ printBoard(theBoard)
 print('Player 1: Please select X or O.') 
 player1 = input()
 
-if player1 = 'X':
+if player1 == 'X':
     player2 = 'O'
     
-elif player1 = 'O':
+elif player1 == 'O':
     player2 = 'X'
     print('Player 1: X, Player 2: O')
 
 # Main game loop.
 while True:
-    if winConditions() = True:
+    if winConditions() == True:
         break
     
     for i in range(9):
