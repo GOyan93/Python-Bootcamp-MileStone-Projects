@@ -17,19 +17,25 @@ def printBoard(board):
 
 printBoard(theBoard)
 
-player1 = X
+player1 = 'X'
 
 
-player2 = O
+player2 = 'O'
 
 
 
-def playerONEchoice(playerONEinput)
-    playerONEInput = input()
+def playerONEchoice(playerONEinput):
     theBoard[playerONEinput] = player1
     printBoard(theBoard)
     
-def playerTWOchoice(playerTWOinput)
-    playerTWOInput = input()
+def playerTWOchoice(playerTWOinput):
     theBoard[playerTWOinput] = player2
     printBoard(theBoard)
+
+print('PLAYER 1: Choose your position.')
+playerONEInput = input()
+playerONEchoice(playerONEInput)
+
+print('PLAYER 2: Choose your position.')
+playerTWOInput = input()
+playerTWOchoice(playerTWOInput)
