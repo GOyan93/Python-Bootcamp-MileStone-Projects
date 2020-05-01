@@ -16,5 +16,20 @@ def printBoard(board):
           board['1'] + '|' + board['2'] + '|' + board['3'])
 
 printBoard(theBoard)
-          
+
+player1 = X
+
+
+player2 = O
+
+
+
+def playerONEchoice(playerONEinput)
+    playerONEInput = input()
+    theBoard[playerONEinput] = player1
+    printBoard(theBoard)
     
+def playerTWOchoice(playerTWOinput)
+    playerTWOInput = input()
+    theBoard[playerTWOinput] = player2
+    printBoard(theBoard)
