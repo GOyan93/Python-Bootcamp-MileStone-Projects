@@ -2,7 +2,7 @@
 #python 3.6.9
 #Author:GOyan
 
-#TODO add intro, rules. Add working replay function. Polish board up. Add game/win counter.
+#TODO Add working replay function. Polish board up. Add game/win counter.
 
 
 import sys
@@ -11,7 +11,12 @@ theBoard = {'7': ' ', '8': ' ', '9': ' ',
             '4': ' ', '5': ' ', '6': ' ',
             '1': ' ', '2': ' ', '3': ' '}
 
-
+def exampleBoard():
+    print('7' + '|' + '8' + '|' + '9' + '\n' +
+          '-' + '+' + '-' + '+' + '-' + '\n' +
+          '4' + '|' + '5' + '|' + '6' + '\n' +
+          '-' + '+' + '-' + '+' + '-' + '\n' +
+          '1' + '|' + '2' + '|' + '3')
 
 def printBoard(board):
     print(board['7'] + '|' + board['8'] + '|' + board['9'] + '\n' +
@@ -99,11 +104,19 @@ def replay():
         sys.exit()
         
 #TODO Add introduction and rules.
-printBoard(theBoard)
+print("""Welcome to TIC TAC TOE!
+
+THE RULES
+
+1. 2 Players. 1st player goes first and chooses X or O.
+2. Each turn a player will choose a spot on the board to place their piece.\n""")
+exampleBoard()
+print("\n3. The first person to get three pieces in a row (horizontal, vertical or diagonal wins!\n")
 
 #Player selection.
-print('Player 1: Please select X or O.') 
+print('Player 1: Please select X or O.')
 player1 = input()
+printBoard(theBoard)
 
 if player1.upper() == 'X':
     player2 = 'O'
@@ -116,7 +129,7 @@ while winConditions() == False:
     mainGame()
     if winConditions() == True:
         win()
-        replay()
+        #replay()
     else:
         continue
 
