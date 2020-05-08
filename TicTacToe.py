@@ -81,12 +81,19 @@ def mainGame():
     
         print('PLAYER 1: Choose your position.')
         playerONEInput = input()
-        playerONEchoice(playerONEInput.upper())
-
+        while int(playerONEInput) > 9 or int(playerONEInput) < 1:
+            print("Please select a position between 1 and 9.")
+            playerONEInput = input()
+        else:
+            playerONEchoice(playerONEInput.upper())
         
         print('PLAYER 2: Choose your position.')
         playerTWOInput = input()
-        playerTWOchoice(playerTWOInput.upper())
+        while int(playerTWOInput) > 9 or int(playerTWOInput) < 1:
+            print("Please select a position between 1 and 9.")
+            playerTWOInput = input()
+        else:
+            playerTWOchoice(playerTWOInput.upper())
         
 def replay():
     print('Would you like to play again? (Y/N)')
