@@ -3,6 +3,7 @@
 #Author:GOyan
 
 #TODO Add working replay function. Polish board up. Add game/win counter.
+#May need to rewrite functions and order.
 
 
 import sys
@@ -110,7 +111,6 @@ def replay():
     else:
         sys.exit()
         
-#TODO Add introduction and rules.
 print("""Welcome to TIC TAC TOE!
 
 THE RULES
