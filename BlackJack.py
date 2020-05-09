@@ -20,10 +20,40 @@
 
 # Create deck class
     # Full deck function
-    # removal of cards in deck function
-        # Must be randomly drawn
+    # Must be randomly drawn
     # reset deck function
     # if sum is greater than 21, Ace = 1, else equals 11
+    # Deck has 52 cards
+    # Deck has 4 suits: Hearts, Clubs, Diamons, Spades
+    # Cards, 2-10, J,Q,K (all worth 10), A (worth 1 or 11)
+
+class Card:
+    def __init__(self, suit, val):
+        self.suit = suit
+        self.value = val
+
+    def show(self):
+        print('{} of {}'.format(self.value, self.suit))
+
+
+class Deck:
+    def __init__(self):
+        self.cards = []
+        self.build()
+
+    def build(self):
+        for suit in ["Hearts", "Spades", "Clubs", "Diamonds"]:
+              for value in range(1, 14):
+                  self.cards.append(Card(suit, value))
+
+    def show(self):
+        for c in self.cards:
+            c.show()
+
+
+              
+        
+
 
 # Create bank class
     # base amount to start bank
