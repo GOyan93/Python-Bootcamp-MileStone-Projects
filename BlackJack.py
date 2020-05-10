@@ -3,6 +3,8 @@
 # Description: A basic blackjack style game based on OOP in python.
 # Python 3.6 
 
+import random
+
 
 # Game Layout
     # Asks player for bet amount
@@ -50,8 +52,11 @@ class Deck:
         for c in self.cards:
             c.show()
 
-
-              
+    def shuffle(self):
+        for i in range(len(self.cards)-1, 0, -1):
+            r = random.randint(0, i)
+            self.cards[i], self.cards[r] = self.cards[r], self.cards[i]
+            
         
 
 
