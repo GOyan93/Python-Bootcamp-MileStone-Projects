@@ -4,8 +4,8 @@
 # Python 3.6 
 
 import random
-from Decimal import decimal
-
+import decimal
+import sys
 
 # Game Layout
     # Asks player for bet amount
@@ -61,6 +61,7 @@ class Deck:
     def drawCard(self):
         return self.cards.pop()
 
+
 class Player:
     def __init__(self, name):
         self.name = name
@@ -74,14 +75,6 @@ class Player:
         for card in self.hand:
             card.show()
             
-deck = Deck()
-deck.shuffle()
-
-Greg = Player("Greg")
-Greg.draw(deck)
-Greg.draw(deck)
-Greg.showHand()
-
 
 # Create bank class
 class Bank:
@@ -105,10 +98,18 @@ class Bank:
 
     def deposit(self, winnings):
         self.balance += winnings
-        print("The winnings of ${} have been deposited into your account. You have a total of ${}.".format(winnings, self.balance)
+        print("The winnings of ${} have been deposited into your account. You have a total of ${}.".format(winnings, self.balance))
             
     
-
+def replay():
+    player_input = input('Would you like to reset bank and play again?: ')
+    if player_input[0].upper() == 'Y':
+        game_on = True
+        
+    else:
+        game_on = False
+        print('Thank you for playing!')
+        sys.exit()
 # Create win / loss check function
 
 # Create bust check function
@@ -118,7 +119,22 @@ class Bank:
     # if money  = 0, stop playing
     # if player inputs certain key, stops playing
 
+game_on = True
 
+while game_on:
+    deck = Deck()
+    deck.shuffle()
+
+    P1 = Player("P1")
+    P1.draw(deck)
+    P1.draw(deck)
+    P1.showHand()
+
+    Comp = Player("Comp")
+    Comp.draw(deck)
+    Comp.draw(deck)
+    Comp.showHand()
+    replay()
     
 # Dealer rules:
     # When the player has played:
