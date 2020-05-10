@@ -4,6 +4,7 @@
 # Python 3.6 
 
 import random
+from Decimal import decimal
 
 
 # Game Layout
@@ -88,6 +89,26 @@ Greg.showHand()
     # deposit function for wins
     # Alert function for when withdrawing more than bank amount
     # Alert function for when bank = 0
+
+class Bank:
+    def __init__(self, balance = 0.00):
+        self.balance = balance
+
+        def __str__(self):
+            return f'Account Balance: ${self.balance}'
+        
+        def bet(self, amount):
+            if amount <= self.balance:
+                self.balance -= amount
+                print("You have bet ${}. There is ${} remaining in your account.".format(amount, self.balance))
+            else:
+                print("You do not have enough funds.")
+
+        def deposit(self, winnings):
+            self.balance += winnings
+            print("The winnings of ${} have been deposited into your account. You have a total of ${}.".format(winnings, self.balance)
+            
+
 
 # Create win / loss check function
 
