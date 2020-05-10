@@ -102,6 +102,7 @@ class Player:
         val2 = int(self.hand[1].valueReturn())
         handSum = (val1 + val2)
         print(handSum)
+        return handSum
 
             
 class Bank:
@@ -128,6 +129,17 @@ class Bank:
         print("The winnings of ${} have been deposited into your account. You have a total of ${}.".format(winnings, self.balance))
 
 
+def comparison(P1_card_sum, Comp_card_sum):
+
+    if (P1_card_sum >= Comp_card_sum and P1_card_sum < 22) or (Comp_card_sum > 21 and P1_card_sum < 22):
+        print('WIN! You have won the hand.')
+        # Win statement including sum values for both parties and deposit bet * 2 to bank
+    elif (P1_card_sum < Comp_card_sum) and Comp_card_sum < 22:
+        print('Lose. You have lost the hand.')
+        # Loss statement including sum values for both parties and reset bet amount.
+    elif P1_card_sum > 21:
+        print('BUST. You have lost the hand.')
+        # Bust statement including sum value for player and reset bet amount.
             
 # Replay function for when bank = 0.  
 def replay():
@@ -157,16 +169,18 @@ while game_on:
     P1 = Player("P1")
     P1.draw(deck)
     P1.draw(deck)
-    #P1.showHand()
-    P1.showCardVal()
-    P1.cardSum()
+    P1.showHand()
+    #P1.showCardVal()
+    #P1.cardSum()
 
     Comp = Player("Comp")
     Comp.draw(deck)
     Comp.draw(deck)
-    #Comp.showHand()
-    Comp.showCardVal()
-    Comp.cardSum()
+    Comp.showHand()
+    #Comp.showCardVal()
+    #Comp.cardSum()
+
+    comparison(P1.cardSum(), Comp.cardSum())
     replay()
     
 # Dealer rules:
