@@ -38,7 +38,13 @@ class Card:
     def show(self):
         print('{} of {}'.format(self.value, self.suit))
 
+    def showVal(self):
+        print('{}'.format(self.value))
 
+    def valueReturn(self):
+        return self.value
+        
+    
 class Deck:
     def __init__(self):
         self.cards = []
@@ -61,7 +67,15 @@ class Deck:
     def drawCard(self):
         return self.cards.pop()
 
+    def showVal(self):
+        for c in self.cards:
+            c.showVal()
 
+    def valueReturn(self):
+        for c in self.cards:
+            c.valueReturn()
+
+            
 class Player:
     def __init__(self, name):
         self.name = name
@@ -74,9 +88,22 @@ class Player:
     def showHand(self):
         for card in self.hand:
             card.show()
-            
 
-# Create bank class
+    def sumHand(self):
+        for i in range(len(self.hand)):
+            self.hand[i]
+
+    def showCardVal(self):
+        for card in self.hand:
+            card.showVal()
+
+    def cardSum(self):
+        val1 = int(self.hand[0].valueReturn())
+        val2 = int(self.hand[1].valueReturn())
+        handSum = (val1 + val2)
+        print(handSum)
+
+            
 class Bank:
     def __init__(self, balance = 1000.00):
         self.balance = balance
@@ -99,10 +126,12 @@ class Bank:
     def deposit(self, winnings):
         self.balance += winnings
         print("The winnings of ${} have been deposited into your account. You have a total of ${}.".format(winnings, self.balance))
+
+
             
-    
+# Replay function for when bank = 0.  
 def replay():
-    player_input = input('Would you like to reset bank and play again?: ')
+    player_input = input('Would you like to reset bank and play again? (Yes or No): ')
     if player_input[0].upper() == 'Y':
         game_on = True
         
@@ -128,12 +157,16 @@ while game_on:
     P1 = Player("P1")
     P1.draw(deck)
     P1.draw(deck)
-    P1.showHand()
+    #P1.showHand()
+    P1.showCardVal()
+    P1.cardSum()
 
     Comp = Player("Comp")
     Comp.draw(deck)
     Comp.draw(deck)
-    Comp.showHand()
+    #Comp.showHand()
+    Comp.showCardVal()
+    Comp.cardSum()
     replay()
     
 # Dealer rules:
