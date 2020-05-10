@@ -24,7 +24,7 @@ from Decimal import decimal
 # Create deck class
     # Full deck function
     # Must be randomly drawn
-    # reset deck function
+    # Shuffled every turn 
     # if sum is greater than 21, Ace = 1, else equals 11
     # Deck has 52 cards
     # Deck has 4 suits: Hearts, Clubs, Diamons, Spades
@@ -84,14 +84,10 @@ Greg.showHand()
 
 
 # Create bank class
-    # base amount to start bank
-    # withdrawal function for betting
-    # deposit function for wins
-    # Alert function for when withdrawing more than bank amount
     # Alert function for when bank = 0
 
 class Bank:
-    def __init__(self, balance = 0.00):
+    def __init__(self, balance = 1000.00):
         self.balance = balance
 
         def __str__(self):
