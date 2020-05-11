@@ -6,11 +6,11 @@
 import random
 import decimal
 import sys
-
+import time
 # Game Layout
     # COMPLETE Asks player for bet amount
     # COMPLETE Deals comp 2 cards (only 1 shows), player 2 cards
-    # TODO Asks Player to hit or stand
+    # COMPLETE 
         # After player stand, dealer rules come into play
     # COMPLETE Sums comp hand and sums player hand
         # If either over 21, bust and other wins
@@ -18,12 +18,10 @@ import sys
     # COMPLETE Compares comp sum and player sum
         # Greater or equal is player win
     # TODO
-        #If bet > balance, first bet used for win deposit
-        # Win does not add back to bank
+        # If bet > balance, first bet used for win deposit.
+            # If loss, bank resets to 1000.
         # Cards do not represent A, J, Q, K
-        # Change order so player action between dealer first and second card
         # Introduction and Rules
-        
 
 
 
@@ -48,6 +46,7 @@ class Card:
         print('{}'.format(self.value))
 
     def valueReturn(self):
+        
         return self.value
         
     
@@ -92,34 +91,52 @@ class Player:
         return self
 
     def showHand(self):
+        print("{}'s cards:\n".format(self.name))
         for card in self.hand:
             card.show()
-
+        print("--------------")
+        
     def sumHand(self):
         for i in range(len(self.hand)):
             self.hand[i]
+            
 
     def showCardVal(self):
         for card in self.hand:
             card.showVal()
 
     def cardSum(self):
-        val1 = int(self.hand[0].valueReturn())
-        val2 = int(self.hand[1].valueReturn())
-        handSum = (val1 + val2)
-        print(handSum)
+        vals = []
+        
+        for i in range(len(self.hand)):
+            vals.append(self.hand[i].valueReturn())
+            
+        handSum = sum(vals)
+        print("{}'s card sum:\n".format(self.name))
+        print(str(handSum) + "\n--------------")
         return handSum
 
     def hand_reset(self):
         self.hand = []
 
+    def action(self):
+        hit = True
+        while hit == True:
+            print("Would you like to hit of stand?")
+            action = input().lower()
+            if action == 'hit':
+                hit = True
+                self.draw(deck)
+                self.showHand()
+            if self.cardSum() > 21 or action != 'hit':
+                hit = False
+                pass
 
             
 class Bank:
     def __init__(self, balance=int(1000)):
         self.balance = balance
-
-    
+ 
     def __str__(self):
         return f'Account Balance: ${self.balance}'
 
@@ -130,8 +147,7 @@ class Bank:
     def bet(self, amount):
         if amount < self.balance:
             self.balance -= amount
-            print("You have bet ${}. There is ${} remaining in your account.".format(amount, self.balance))
-            
+            print("You have bet ${}. There is ${} remaining in your account.".format(amount, self.balance))      
         elif amount == self.balance:
             self.balance -= amount
             print("You have bet ${}.".format(amount))
@@ -150,11 +166,9 @@ def comparison(P1_card_sum, Comp_card_sum):
         # Win statement including sum values for both parties and deposit bet * 2 to bank
     elif (P1_card_sum < Comp_card_sum) and Comp_card_sum < 22:
         print('Lose. You have lost the hand.')
-        
         # Loss statement including sum values for both parties and reset bet amount.
     elif P1_card_sum > 21:
         print('BUST. You have lost the hand.')
-        
         # Bust statement including sum value for player and reset bet amount.
     
 
@@ -164,7 +178,7 @@ def P1_bet():
     return amnt
 
     
-# Replay function for when bank = 0.  
+  
 def replay():
     player_input = input('Would you like to reset bank and play again? (Yes or No): ')
     if player_input[0].upper() == 'Y':
@@ -175,43 +189,49 @@ def replay():
         game_on = False
         print('Thank you for playing!')
         sys.exit()
-# Create win / loss check function
-
-# Create bust check function
 
 
-# Create a while loop to keep playing
-    # if money  = 0, stop playing
-    # if player inputs certain key, stops playing
+
+
+
+
 
 game_on = True
 
 P1 = Player("P1")
 P1_bank = Bank()
-Comp = Player("Comp")
+Dealer = Player("Dealer")
 while game_on:
     deck = Deck()
-    deck.shuffle()
-    P1.hand_reset()
-    Comp.hand_reset()
+    deck.shuffle() 
+    P1.hand_reset() 
+    Dealer.hand_reset()     # Shuffles deck for each round and resets hands
     
     print(P1_bank)
-    bet_amount = P1_bet()
+    bet_amount = P1_bet()   # Asks player for bet before cards are dealt
     P1_bank.bet(bet_amount)
     P1.draw(deck)
-    P1.draw(deck)
+    P1.draw(deck)           
+    Dealer.draw(deck)       # Deals 2 cards to player, 1 to Dealer
     P1.showHand()
+    Dealer.showHand()
+    if P1.cardSum() < 22:   # If player has not bust, asks for player action
+        P1.action()
     #P1.showCardVal()
     #P1.cardSum()
 
     
-    Comp.draw(deck)
-    Comp.draw(deck)
-    Comp.showHand()
+    while Dealer.cardSum() <= 16 and P1.cardSum() < 22:   # After player stands, dealer draws depending on sum of cards.
+        Dealer.draw(deck)
+        Dealer.showHand()
+        time.sleep(1)
+    P1.showHand()
+    Dealer.showHand()
+    
     #Comp.showCardVal()
     #Comp.cardSum()
 
-    comparison(P1.cardSum(), Comp.cardSum())
+    comparison(P1.cardSum(), Dealer.cardSum())
     
     if P1_bank.balance == 0:
         replay()
