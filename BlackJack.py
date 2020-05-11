@@ -40,13 +40,23 @@ class Card:
         self.value = val
 
     def show(self):
-        print('{} of {}'.format(self.value, self.suit))
+        face = self.value
+        if face == 11 or face == 1:
+            face = 'Ace'
+        if face == 12:
+            face = 'Jack'
+        if face == 13:
+            face = 'Queen'
+        if self.value == 14:
+            face = 'King'
+        print('{} of {}'.format(face, self.suit))
 
     def showVal(self):
+        
         print('{}'.format(self.value))
 
     def valueReturn(self):
-        
+
         return self.value
         
     
