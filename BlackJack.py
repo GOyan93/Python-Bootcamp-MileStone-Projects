@@ -10,7 +10,7 @@ import sys
 # Game Layout
     # COMPLETE Asks player for bet amount
     # COMPLETE Deals comp 2 cards (only 1 shows), player 2 cards
-    # Asks Player to hit or stand
+    # TODO Asks Player to hit or stand
         # After player stand, dealer rules come into play
     # COMPLETE Sums comp hand and sums player hand
         # If either over 21, bust and other wins
@@ -18,7 +18,7 @@ import sys
     # COMPLETE Compares comp sum and player sum
         # Greater or equal is player win
     # TODO
-        # Bank does not subtract properly
+        #If bet > balance, first bet used for win deposit
         # Win does not add back to bank
         # Cards do not represent A, J, Q, K
         # Change order so player action between dealer first and second card
@@ -110,6 +110,9 @@ class Player:
         print(handSum)
         return handSum
 
+    def hand_reset(self):
+        self.hand = []
+
 
             
 class Bank:
@@ -119,27 +122,31 @@ class Bank:
     
     def __str__(self):
         return f'Account Balance: ${self.balance}'
-        
+
+    def deposit(self, winnings):
+        self.balance += winnings
+        print("The winnings of ${} have been deposited into your account. You have a total of ${}.".format(winnings, self.balance))   
+
     def bet(self, amount):
         if amount < self.balance:
             self.balance -= amount
             print("You have bet ${}. There is ${} remaining in your account.".format(amount, self.balance))
+            
         elif amount == self.balance:
             self.balance -= amount
             print("You have bet ${}.".format(amount))
-            print("!!!ALERT!!!\nYou have ZERO remaining funds!")
+            print("!!!ALERT!!!\nYou have ZERO remaining funds!")  
         else:
             print("You do not have enough funds.")
-
-    def deposit(self, winnings):
-        self.balance += winnings
-        print("The winnings of ${} have been deposited into your account. You have a total of ${}.".format(winnings, self.balance))
+            P1_bet()
+        
+    
 
 
 def comparison(P1_card_sum, Comp_card_sum):
     if (P1_card_sum >= Comp_card_sum and P1_card_sum < 22) or (Comp_card_sum > 21 and P1_card_sum < 22):
         print('WIN! You have won the hand.')
-        
+        P1_bank.deposit(bet_amount * 2)
         # Win statement including sum values for both parties and deposit bet * 2 to bank
     elif (P1_card_sum < Comp_card_sum) and Comp_card_sum < 22:
         print('Lose. You have lost the hand.')
@@ -152,7 +159,9 @@ def comparison(P1_card_sum, Comp_card_sum):
     
 
 def P1_bet():
-    return int(input("How much would you like to bet?\n"))
+    print("How much would you like to bet?")
+    amnt = int(input())
+    return amnt
 
     
 # Replay function for when bank = 0.  
@@ -176,21 +185,25 @@ def replay():
 
 game_on = True
 
+P1 = Player("P1")
+P1_bank = Bank()
+Comp = Player("Comp")
 while game_on:
     deck = Deck()
     deck.shuffle()
-
-    P1 = Player("P1")
-    P1_bank = Bank(1000)
+    P1.hand_reset()
+    Comp.hand_reset()
+    
     print(P1_bank)
-    P1_bank.bet(P1_bet())
+    bet_amount = P1_bet()
+    P1_bank.bet(bet_amount)
     P1.draw(deck)
     P1.draw(deck)
     P1.showHand()
     #P1.showCardVal()
     #P1.cardSum()
 
-    Comp = Player("Comp")
+    
     Comp.draw(deck)
     Comp.draw(deck)
     Comp.showHand()
@@ -198,7 +211,9 @@ while game_on:
     #Comp.cardSum()
 
     comparison(P1.cardSum(), Comp.cardSum())
-
+    
+    if P1_bank.balance == 0:
+        game_on = False
 replay()
     
 # Dealer rules:
