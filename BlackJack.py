@@ -20,7 +20,6 @@ import time
     # TODO
         # If bet > balance, first bet used for win deposit.
             # If loss, bank resets to 1000.
-        # Cards do not represent A, J, Q, K
         # Introduction and Rules
 
 
@@ -41,7 +40,7 @@ class Card:
 
     def show(self):
         face = self.value
-        if face == 11 or face == 1:
+        if face == 11:
             face = 'Ace'
         if face == 12:
             face = 'Jack'
@@ -67,7 +66,7 @@ class Deck:
 
     def build(self):
         for suit in ["Hearts", "Spades", "Clubs", "Diamonds"]:
-              for value in range(1, 14):
+              for value in range(2, 15):
                   self.cards.append(Card(suit, value))
 
     def show(self):
@@ -119,8 +118,17 @@ class Player:
         vals = []
         
         for i in range(len(self.hand)):
-            vals.append(self.hand[i].valueReturn())
+            value = self.hand[i].valueReturn()
+            if value == 12 or value == 13 or value == 14:
+                value = 10
+            vals.append(value)
             
+            
+        handSum = sum(vals)
+        if handSum > 21:
+            for i in range(len(vals)):
+                if vals[i] == 11:
+                    vals[i] = 1
         handSum = sum(vals)
         print("{}'s card sum:\n".format(self.name))
         print(str(handSum) + "\n--------------")
