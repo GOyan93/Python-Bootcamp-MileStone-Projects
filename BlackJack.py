@@ -7,6 +7,7 @@ import random
 import decimal
 import sys
 import time
+
 # Game Layout
     # COMPLETE Asks player for bet amount
     # COMPLETE Deals comp 2 cards (only 1 shows), player 2 cards
@@ -19,20 +20,15 @@ import time
         # Greater or equal is player win
     # TODO
         # If bet > balance, first bet used for win deposit.
-            # If loss, bank resets to 1000.
         # Introduction and Rules
+        
+# Dealer rules:
+    # When the player has played:
+        # The second card is shown.
+        # If dealer <= 16, the dealer must draw
+        # If dealer >= 17, the dealer must stand
 
-
-
-# Create deck class
-    # Full deck function
-    # Must be randomly drawn
-    # Shuffled every turn 
-    # if sum is greater than 21, Ace = 1, else equals 11
-    # Deck has 52 cards
-    # Deck has 4 suits: Hearts, Clubs, Diamons, Spades
-    # Cards, 2-10, J,Q,K (all worth 10), A (worth 1 or 11)
-
+        
 class Card:
     def __init__(self, suit, val):
         self.suit = suit
@@ -162,17 +158,20 @@ class Bank:
         self.balance += winnings
         print("The winnings of ${} have been deposited into your account. You have a total of ${}.".format(winnings, self.balance))   
 
-    def bet(self, amount):
-        if amount < self.balance:
+    def bet(self, amount):          
+        if amount > self.balance:
+            print("You do not have enough funds.")
+            amount = P1_bet()
+            self.bet(amount)
+            print('Balace: {}'.format(self.balance))
+        elif amount < self.balance:
             self.balance -= amount
             print("You have bet ${}. There is ${} remaining in your account.".format(amount, self.balance))      
         elif amount == self.balance:
             self.balance -= amount
             print("You have bet ${}.".format(amount))
             print("!!!ALERT!!!\nYou have ZERO remaining funds!")  
-        else:
-            print("You do not have enough funds.")
-            P1_bet()
+        
         
     
 
@@ -227,7 +226,8 @@ while game_on:
     
     print(P1_bank)
     bet_amount = P1_bet()   # Asks player for bet before cards are dealt
-    P1_bank.bet(bet_amount)
+    # bet_amount used in comparison function, causing over deposit on overbet win
+    P1_bank.bet(bet_amount)       
     P1.draw(deck)
     P1.draw(deck)           
     Dealer.draw(deck)       # Deals 2 cards to player, 1 to Dealer
@@ -235,27 +235,17 @@ while game_on:
     Dealer.showHand()
     if P1.cardSum() < 22:   # If player has not bust, asks for player action
         P1.action()
-    #P1.showCardVal()
-    #P1.cardSum()
-
-    
+       
     while Dealer.cardSum() <= 16 and P1.cardSum() < 22:   # After player stands, dealer draws depending on sum of cards.
         Dealer.draw(deck)
         Dealer.showHand()
         time.sleep(1)
     P1.showHand()
     Dealer.showHand()
-    
-    #Comp.showCardVal()
-    #Comp.cardSum()
 
     comparison(P1.cardSum(), Dealer.cardSum())
     
     if P1_bank.balance == 0:
         replay()
     
-# Dealer rules:
-    # When the player has played:
-        # The second card is shown.
-        # If dealer <= 16, the dealer must draw
-        # If dealer >= 17, the dealer must stand
+
