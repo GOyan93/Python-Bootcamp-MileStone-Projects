@@ -23,7 +23,7 @@ import sys
         # Cards do not represent A, J, Q, K
         # Change order so player action between dealer first and second card
         # Introduction and Rules
-
+        
 
 
 
@@ -168,6 +168,7 @@ def P1_bet():
 def replay():
     player_input = input('Would you like to reset bank and play again? (Yes or No): ')
     if player_input[0].upper() == 'Y':
+        P1_bank.deposit(1000)
         game_on = True
         
     else:
@@ -213,8 +214,7 @@ while game_on:
     comparison(P1.cardSum(), Comp.cardSum())
     
     if P1_bank.balance == 0:
-        game_on = False
-replay()
+        replay()
     
 # Dealer rules:
     # When the player has played:
