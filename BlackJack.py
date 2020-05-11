@@ -8,15 +8,21 @@ import decimal
 import sys
 
 # Game Layout
-    # Asks player for bet amount
-    # Deals comp 2 cards (only 1 shows), player 2 cards
+    # COMPLETE Asks player for bet amount
+    # COMPLETE Deals comp 2 cards (only 1 shows), player 2 cards
     # Asks Player to hit or stand
         # After player stand, dealer rules come into play
-    # Sums comp hand and sums player hand
+    # COMPLETE Sums comp hand and sums player hand
         # If either over 21, bust and other wins
         # If both bust, comp wins
-    # Compares comp sum and player sum
+    # COMPLETE Compares comp sum and player sum
         # Greater or equal is player win
+    # TODO
+        # Bank does not subtract properly
+        # Win does not add back to bank
+        # Cards do not represent A, J, Q, K
+        # Change order so player action between dealer first and second card
+        # Introduction and Rules
 
 
 
@@ -104,9 +110,10 @@ class Player:
         print(handSum)
         return handSum
 
+
             
 class Bank:
-    def __init__(self, balance = 1000.00):
+    def __init__(self, balance=int(1000)):
         self.balance = balance
 
     
@@ -130,17 +137,24 @@ class Bank:
 
 
 def comparison(P1_card_sum, Comp_card_sum):
-
     if (P1_card_sum >= Comp_card_sum and P1_card_sum < 22) or (Comp_card_sum > 21 and P1_card_sum < 22):
         print('WIN! You have won the hand.')
+        
         # Win statement including sum values for both parties and deposit bet * 2 to bank
     elif (P1_card_sum < Comp_card_sum) and Comp_card_sum < 22:
         print('Lose. You have lost the hand.')
+        
         # Loss statement including sum values for both parties and reset bet amount.
     elif P1_card_sum > 21:
         print('BUST. You have lost the hand.')
+        
         # Bust statement including sum value for player and reset bet amount.
-            
+    
+
+def P1_bet():
+    return int(input("How much would you like to bet?\n"))
+
+    
 # Replay function for when bank = 0.  
 def replay():
     player_input = input('Would you like to reset bank and play again? (Yes or No): ')
@@ -167,6 +181,9 @@ while game_on:
     deck.shuffle()
 
     P1 = Player("P1")
+    P1_bank = Bank(1000)
+    print(P1_bank)
+    P1_bank.bet(P1_bet())
     P1.draw(deck)
     P1.draw(deck)
     P1.showHand()
@@ -181,7 +198,8 @@ while game_on:
     #Comp.cardSum()
 
     comparison(P1.cardSum(), Comp.cardSum())
-    replay()
+
+replay()
     
 # Dealer rules:
     # When the player has played:
