@@ -8,26 +8,6 @@ import decimal
 import sys
 import time
 
-# Game Layout
-    # COMPLETE Asks player for bet amount
-    # COMPLETE Deals comp 2 cards (only 1 shows), player 2 cards
-    # COMPLETE 
-        # After player stand, dealer rules come into play
-    # COMPLETE Sums comp hand and sums player hand
-        # If either over 21, bust and other wins
-        # If both bust, comp wins
-    # COMPLETE Compares comp sum and player sum
-        # Greater or equal is player win
-    # TODO
-        # If bet > balance, first bet used for win deposit.
-        # Introduction and Rules
-        
-# Dealer rules:
-    # When the player has played:
-        # The second card is shown.
-        # If dealer <= 16, the dealer must draw
-        # If dealer >= 17, the dealer must stand
-
         
 class Card:
     def __init__(self, suit, val):
@@ -159,12 +139,7 @@ class Bank:
         print("The winnings of ${} have been deposited into your account. You have a total of ${}.".format(winnings, self.balance))   
 
     def bet(self, amount):          
-        if amount > self.balance:
-            print("You do not have enough funds.")
-            amount = P1_bet()
-            self.bet(amount)
-            print('Balace: {}'.format(self.balance))
-        elif amount < self.balance:
+        if amount < self.balance:
             self.balance -= amount
             print("You have bet ${}. There is ${} remaining in your account.".format(amount, self.balance))      
         elif amount == self.balance:
@@ -190,8 +165,14 @@ def comparison(P1_card_sum, Comp_card_sum):
     
 
 def P1_bet():
-    print("How much would you like to bet?")
-    amnt = int(input())
+    print("How much would you like to bet? (Type 'quit' to stop playing.)")
+    answer = input()
+    if answer.lower() == 'quit':
+        game_on = False
+        print('Thank you for playing!')
+        sys.exit()
+    amnt = int(answer)
+    
     return amnt
 
     
@@ -207,15 +188,45 @@ def replay():
         print('Thank you for playing!')
         sys.exit()
 
+#######################################################################################################################
+# Main Game Sequence
+
+print("WELCOME TO BLACKJACK!")
+print("""***RULES***
+__________________________________________________________________________________________________________
+
+1. You start with $1000 in the bank. Choose an amount to bet.
+   - If you win, the dealer will give back your original bet + the matched amount!
+   - If you lose, the dealer takes your bet.
+
+2. You are dealt 2 cards. The dealer is dealt two but only one is shown.
+   - You are trying to beat the dealers cards. Anything over 21, you bust and lose.
+   - Ace counts for 11 or 1 if your sum is over 21.
+   - Jack, Queen, and King are all worth 10.
+
+3. You will be asked to 'hit' or 'stand'.
+   - Hitting will draw you another card
+   - Standing will secure the cards you have and the dealer will draw.
+
+Dealer Rules:
+
+When the player has played and stands:
+   - The dealer's second card is shown.
+   - If dealer's cards are 16 or more, the dealer must draw.
+   - If dealer's cards are 17 or more, the dealer must stand.
+   - If the dealer busts, you win!
+
+4. - If your cards are greater than the dealers, you win and the winnings are deposited to your account!
+   - If your cards are lower than the dealers, you lose and the dealer claims your bet.
 
 
+LETS PLAY!!!
 
-
-
-
+!!!BLACKJACK!!!
+____________________________________________________________________________________________________________""")
 game_on = True
 
-P1 = Player("P1")
+P1 = Player("Your")
 P1_bank = Bank()
 Dealer = Player("Dealer")
 while game_on:
@@ -226,7 +237,9 @@ while game_on:
     
     print(P1_bank)
     bet_amount = P1_bet()   # Asks player for bet before cards are dealt
-    # bet_amount used in comparison function, causing over deposit on overbet win
+    while bet_amount > P1_bank.balance:
+        print("You do not have enough funds.")
+        bet_amount = P1_bet() 
     P1_bank.bet(bet_amount)       
     P1.draw(deck)
     P1.draw(deck)           
